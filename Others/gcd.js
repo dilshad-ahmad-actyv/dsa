@@ -16,13 +16,12 @@ function runProgram(input) {
 
         // return gcd(x%y, y);
 
-        // while(a !== 0){
-        //     let temp = a;
-        //     a = b%a;
-        //     b = temp;
-        // }
-        // return b;
-        return Math.gcd(a, b);
+        while(a !== 0){
+            let temp = a;
+            a = b%a;
+            b = temp;
+        }
+        return b;
     }
 }
   
