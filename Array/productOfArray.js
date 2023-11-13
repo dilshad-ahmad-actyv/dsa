@@ -3,7 +3,26 @@ function runProgram(input) {
     let test = +input[0];
     let line = 1;
 
-    console.log(input);
+    for(let i=0; i<test; i++){
+        let n = +input[line++];
+        let nums = input[line++].trim().split(' ').map(Number);
+        const result = productOfArray(n, nums);
+        console.log(result);
+    }
+
+    function productOfArray(n, nums){
+        let ans = [];
+        let products = 1;
+        for(let i=0; i<n; i++){
+           products *= nums[i];
+        }
+
+        for(let j=0; j<n; j++){
+            let eachProduct = products / nums[j];
+            ans.push(eachProduct);
+        }
+        return ans.join(' ');
+    }
 }
   
   if (process.env.USER === 'dilshadahmad') {
