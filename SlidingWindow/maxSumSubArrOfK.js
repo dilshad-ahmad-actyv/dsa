@@ -27,17 +27,41 @@
 // console.log(result);
 
 const nums = [2, 4, 3, 8, 0, -1, 10];
-const k = 3;
-const n = nums.length;
+// const k = 3;
+// const n = nums.length;
+// let max = -Infinity;
+// // brute force solution
+// for (let i = 0; i < n; i++) {
+//   let sum = 0;
+//   for (let j = i; j < i + k; j++) {
+//     sum += nums[j];
+//   }
+//   if (max < sum) {
+//     max = sum;
+//   }
+// }
+
+// console.log(max);
+
+// sliding window solution
+
+let i = 0;
+let j = 0;
+let n = nums.length;
 let max = -Infinity;
-// brute force solution
-for (let i = 0; i < n; i++) {
-  let sum = 0;
-  for (let j = i; j < i + k; j++) {
-    sum += nums[j];
-  }
-  if (max < sum) {
-    max = sum;
+let sum = 0;
+const k = 3;
+while (j < n) {
+  sum += nums[j];
+  if (j - i + 1 < k) {
+    j++;
+  } else if (j - i + 1 === k) {
+    if (max < sum) {
+      max = sum;
+    }
+    sum -= nums[i];
+    i++;
+    j++;
   }
 }
 
