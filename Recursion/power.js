@@ -13,12 +13,12 @@ function powerLogarithmic(x, n) {
   let power = Math.floor(n / 2);
 
   let xnb2 = powerLogarithmic(x, power);
-  let product = x ** power;
-  let result = product * xnb2;
+  let xn = xnb2 * xnb2;
+
   if (n % 2 === 1) {
-    result = result * product;
+    xn = xn * x;
   }
-  return result;
+  return xn;
 }
 
-console.log(powerLogarithmic(2, 6));
+console.log(powerLogarithmic(2, 5));
