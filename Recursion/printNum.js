@@ -1,18 +1,18 @@
-// function increaseNum(n) {
-//   if (n < 1) return;
-//   console.log(n);
-//   increaseNum(n - 1);
-// }
+function increaseNum(n) {
+  if (n < 1) return;
+  console.log(n);
+  increaseNum(n - 1);
+}
 
-// increaseNum(10);
+increaseNum(10);
 
-// function decreseNum(n) {
-//   if (n < 1) return;
-//   decreseNum(n - 1);
-//   console.log(n);
-// }
+function decreseNum(n) {
+  if (n < 1) return;
+  decreseNum(n - 1);
+  console.log(n);
+}
 
-// decreseNum(10);
+decreseNum(10);
 
 function increaseDecrease(n) {
   if (n < 1) return;
