@@ -138,21 +138,31 @@ e.next = f;
 // const result = reverseLinkedList(a);
 // console.log(result)
 
-const reverseLinkedList = (head) => {
-  if (!head) return null;
-  let prev = null;
-  let current = head;
-  return reverse(current, prev);
-};
+// const reverseLinkedList = (head) => {
+//   if (!head) return null;
+//   let prev = null;
+//   let current = head;
+//   return reverse(current, prev);
+// };
 
-const result = reverseLinkedList(a);
-console.log(result);
+// const result = reverseLinkedList(a);
+// console.log(result);
 
-function reverse(head, prev) {
-  if (!head) return prev;
-  let current = head;
-  let next = current.next;
-  current.next = prev;
-  prev = current;
-  return reverse(next, prev);
-}
+// function reverse(head, prev) {
+//   if (!head) return prev;
+//   let current = head;
+//   let next = current.next;
+//   current.next = prev;
+//   prev = current;
+//   return reverse(next, prev);
+// }
+
+const reverseLinkedList = (head, prev = null) => {
+    if(!head) return prev;
+    let next = head.next;
+    head.next = prev;
+    return reverseLinkedList(next, head);
+  };
+  
+  const result = reverseLinkedList(a);
+  console.log(result);
