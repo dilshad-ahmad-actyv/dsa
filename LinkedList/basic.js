@@ -51,22 +51,47 @@ e.next = f;
 // const values = [];
 // console.log(linkedListValues(a, values));
 
-const sumList = (head, sum) => {
-  //   let current = head;
-  //   while (current !== null) {
-  //     sum += current.val;
-  //     current = current.next;
-  //   }
-  return addValues(head, sum);
-};
+// const sumList = (head, sum) => {
+//   //   let current = head;
+//   //   while (current !== null) {
+//   //     sum += current.val;
+//   //     current = current.next;
+//   //   }
+//   return addValues(head, sum);
+// };
 
-const result = sumList(a, 0);
-console.log(result);
+// const result = sumList(a, 0);
+// console.log(result);
 
-function addValues(head, sum) {
-  console.log(head, sum);
-  if (head === null) return sum;
-  let current = head;
-  sum += current.val;
-  return addValues(current.next, sum);
-};
+// function addValues(head, sum) {
+//   console.log(head, sum);
+//   if (head === null) return sum;
+//   let current = head;
+//   sum += current.val;
+//   return addValues(current.next, sum);
+// };
+
+
+// const linkedListFind = (head, target) => {
+//   if (!head) return false;
+//   let current = head;
+//   while (current) {
+//     if (current.val === target) return true;
+//     current = current.next;
+//   }
+//   return false;
+// };
+// const target = 1;
+// const result = linkedListFind(a, target);
+// console.log(result);
+
+// const linkedListFind = (head, target)=>{
+//   if (!head) return false;
+//   let current = head;
+//   if (current.val === target) return true;
+//   return linkedListFind(current.next, target);
+// }
+
+// const target = 1;
+// const result = linkedListFind(a, target);
+// console.log(result);
