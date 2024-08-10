@@ -20,14 +20,34 @@ e.next = f;
 
 // A --> B --> C --> D --> E --F ---> NULL
 // head                       //tail
-const printLinkedList = (head) => {
-  //   while (head) {
-  //     console.log(head.val);
-  //     head = head.next;
+// const printLinkedList = (head) => {
+//   //   while (head) {
+//   //     console.log(head.val);
+//   //     head = head.next;
+//   //   }
+//   let current = head;
+//   if (!current) return null;
+//   console.log("current", current.val);
+//   return printLinkedList(current.next);
+// };
+// printLinkedList(a);
+
+
+const linkedListValues = (head, values) => {
+  //   const values = [];
+  //   let current = head;
+
+  //   while (current !== null) {
+  //     values.push(current.val);
+  //     current = current.next;
   //   }
+  //   return values;
+
   let current = head;
-  if (!current) return null;
-  console.log("current", current.val);
-  return printLinkedList(current.next);
+  if (current === null) return null;
+  values.push(current.val);
+  linkedListValues(current.next, values);
+  return values;
 };
-printLinkedList(a);
+const values = [];
+console.log(linkedListValues(a, values));
