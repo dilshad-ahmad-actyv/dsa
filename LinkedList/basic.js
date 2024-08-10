@@ -5,12 +5,12 @@ class Node {
   }
 }
 
-const a = new Node("A");
-const b = new Node("B");
-const c = new Node("C");
-const d = new Node("D");
-const e = new Node("E");
-const f = new Node("F");
+const a = new Node(2);
+const b = new Node(8);
+const c = new Node(3);
+const d = new Node(7);
+const e = new Node(10);
+const f = new Node(2);
 
 a.next = b;
 b.next = c;
@@ -32,22 +32,41 @@ e.next = f;
 // };
 // printLinkedList(a);
 
+// const linkedListValues = (head, values) => {
+//   //   const values = [];
+//   //   let current = head;
 
-const linkedListValues = (head, values) => {
-  //   const values = [];
+//   //   while (current !== null) {
+//   //     values.push(current.val);
+//   //     current = current.next;
+//   //   }
+//   //   return values;
+
+//   let current = head;
+//   if (current === null) return null;
+//   values.push(current.val);
+//   linkedListValues(current.next, values);
+//   return values;
+// };
+// const values = [];
+// console.log(linkedListValues(a, values));
+
+const sumList = (head, sum) => {
   //   let current = head;
-
   //   while (current !== null) {
-  //     values.push(current.val);
+  //     sum += current.val;
   //     current = current.next;
   //   }
-  //   return values;
-
-  let current = head;
-  if (current === null) return null;
-  values.push(current.val);
-  linkedListValues(current.next, values);
-  return values;
+  return addValues(head, sum);
 };
-const values = [];
-console.log(linkedListValues(a, values));
+
+const result = sumList(a, 0);
+console.log(result);
+
+function addValues(head, sum) {
+  console.log(head, sum);
+  if (head === null) return sum;
+  let current = head;
+  sum += current.val;
+  return addValues(current.next, sum);
+};
