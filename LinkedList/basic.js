@@ -95,3 +95,33 @@ e.next = f;
 // const target = 1;
 // const result = linkedListFind(a, target);
 // console.log(result);
+
+
+// const linkedListFindIndexValue = (head, index) => {
+//   let cnt = 0;
+//   let current = head;
+//   while (current) {
+//     if (cnt === index) return current.val;
+//     current = current.next;
+//     cnt++;
+//   }
+//   return -1;
+// };
+
+// const index = 40;
+// const result = linkedListFindIndexValue(a, index);
+// console.log(result);
+
+
+
+const linkedListFindIndexValue = (head, index) => {
+    if(!head) return -1;
+
+    let current = head;
+    if(index === 0) return current.val;
+    return linkedListFindIndexValue(current.next, index-1); 
+  };
+  
+  const index = 4;
+  const result = linkedListFindIndexValue(a, index);
+  console.log(result);
