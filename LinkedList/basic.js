@@ -5,12 +5,12 @@ class Node {
   }
 }
 
-const a = new Node(2);
-const b = new Node(8);
-const c = new Node(3);
-const d = new Node(7);
-const e = new Node(10);
-const f = new Node(2);
+const a = new Node("A");
+const b = new Node("B");
+const c = new Node("C");
+const d = new Node("D");
+const e = new Node("E");
+const f = new Node("F");
 
 a.next = b;
 b.next = c;
@@ -71,7 +71,6 @@ e.next = f;
 //   return addValues(current.next, sum);
 // };
 
-
 // const linkedListFind = (head, target) => {
 //   if (!head) return false;
 //   let current = head;
@@ -96,7 +95,6 @@ e.next = f;
 // const result = linkedListFind(a, target);
 // console.log(result);
 
-
 // const linkedListFindIndexValue = (head, index) => {
 //   let cnt = 0;
 //   let current = head;
@@ -112,16 +110,49 @@ e.next = f;
 // const result = linkedListFindIndexValue(a, index);
 // console.log(result);
 
+// const linkedListFindIndexValue = (head, index) => {
+//     if(!head) return -1;
 
+//     let current = head;
+//     if(index === 0) return current.val;
+//     return linkedListFindIndexValue(current.next, index-1);
+//   };
 
-const linkedListFindIndexValue = (head, index) => {
-    if(!head) return -1;
+//   const index = 4;
+//   const result = linkedListFindIndexValue(a, index);
+//   console.log(result);
 
-    let current = head;
-    if(index === 0) return current.val;
-    return linkedListFindIndexValue(current.next, index-1); 
-  };
-  
-  const index = 4;
-  const result = linkedListFindIndexValue(a, index);
-  console.log(result);
+// const reverseLinkedList = (head)=>{
+//   let prev = null;
+//   let current = head;
+
+//   while (current) {
+//     let next = current.next;
+//     current.next = prev;
+//     prev = current;
+//     current = next;
+//   }
+//   return prev;
+// }
+
+// const result = reverseLinkedList(a);
+// console.log(result)
+
+const reverseLinkedList = (head) => {
+  if (!head) return null;
+  let prev = null;
+  let current = head;
+  return reverse(current, prev);
+};
+
+const result = reverseLinkedList(a);
+console.log(result);
+
+function reverse(head, prev) {
+  if (!head) return prev;
+  let current = head;
+  let next = current.next;
+  current.next = prev;
+  prev = current;
+  return reverse(next, prev);
+}
