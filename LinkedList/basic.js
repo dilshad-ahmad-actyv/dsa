@@ -12,12 +12,18 @@ const d = new Node("D");
 const e = new Node("E");
 const f = new Node("F");
 
+const x = new Node(1);
+const y = new Node(2);
+const z = new Node(3);
+
 a.next = b;
 b.next = c;
 c.next = d;
 d.next = e;
 e.next = f;
 
+x.next = y;
+y.next = z;
 // A --> B --> C --> D --> E --F ---> NULL
 // head                       //tail
 // const printLinkedList = (head) => {
@@ -157,12 +163,56 @@ e.next = f;
 //   return reverse(next, prev);
 // }
 
-const reverseLinkedList = (head, prev = null) => {
-    if(!head) return prev;
-    let next = head.next;
-    head.next = prev;
-    return reverseLinkedList(next, head);
-  };
+// const reverseLinkedList = (head, prev = null) => {
+//     if(!head) return prev;
+//     let next = head.next;
+//     head.next = prev;
+//     return reverseLinkedList(next, head);
+//   };
+
+//   const result = reverseLinkedList(a);
+//   console.log(result);
+
+// const zipperList = (head1, head2) => {
+//     if (!head1 && !head2) return null;
+//   if (!head1) return head2;
+//   if (!head2) return head1;
+//   let tail = head1;
+//   let current1 = head1.next;
+//   let current2 = head2;
+//   let count = 0;
+
+//   while (current1 && current2) {
+//     if (count % 2 === 0) {
+//       tail.next = current2;
+//       current2 = current2.next;
+//     } else {
+//       tail.next = current1;
+//       current1 = current1.next;
+//     }
+//     tail = tail.next;
+//     count++;
+//   }
+//   if (current1) tail.next = current1;
+//   if (current2) tail.next = current2;
+//   return head1;
+// };
+
+// const result = zipperList(a, x);
+// console.log(result);
+
+const zipperList = (head1, head2) => {
+    if (!head1 && !head2) return null;
+  if (!head1) return head2;
+  if (!head2) return head1;
   
-  const result = reverseLinkedList(a);
-  console.log(result);
+  let next1 = head1.next;
+  let next2 = head2.next;
+
+  head1.next = head2;
+  head2.next = zipperList(next1, next2);
+  return head1;
+};
+
+const result = zipperList(a, x);
+console.log(result);
