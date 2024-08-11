@@ -10,12 +10,12 @@ class Node {
   }
 }
 
-const a = new Node("A");
-const b = new Node("B");
-const c = new Node("C");
-const d = new Node("D");
-const e = new Node("E");
-const f = new Node("F");
+const a = new Node(3);
+const b = new Node(11);
+const c = new Node(4);
+const d = new Node(4);
+const e = new Node(2);
+const f = new Node(1);
 
 a.left = b;
 a.right = c;
@@ -93,11 +93,37 @@ c.right = f;
 // const output = treeIncludes(a, "Z");
 // console.log(output)
 
-const treeIncludes = (root, target) => {
-  if(!root) return false;
-  if(root.val === target) return true;
-  return treeIncludes(root.left, target) || treeIncludes(root.right, target);
+// const treeIncludes = (root, target) => {
+//   if(!root) return false;
+//   if(root.val === target) return true;
+//   return treeIncludes(root.left, target) || treeIncludes(root.right, target);
+// };
+
+// const output = treeIncludes(a, "E");
+// console.log(output)
+
+// const treeSum = (root, sum) => {
+//   if (!root) return sum;
+//   const stack = [root];
+
+//   while (stack.length) {
+//     const current = stack.pop();
+//     sum += current.val;
+
+//     if (current.left) stack.push(current.left);
+//     if (current.right) stack.push(current.right);
+//   }
+//   return sum;
+// };
+
+// const output = treeSum(a, 0);
+// console.log(output);
+
+const treeSum = (root, sum) => {
+  if (!root) return 0;
+
+  return root.val + treeSum(root.left, sum) + treeSum(root.right, sum);
 };
 
-const output = treeIncludes(a, "E");
-console.log(output)
+const output = treeSum(a, 0);
+console.log(output);
