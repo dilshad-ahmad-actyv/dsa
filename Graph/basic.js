@@ -89,3 +89,43 @@
 // addEdge("d", "f");
 
 // console.log(graph)
+
+
+// const hasPath = (graph, source, destination) => {
+//   if (source === destination) return true;
+
+//   for (let neighbour of graph[source]) {
+//     if (hasPath(graph, neighbour, destination)) {
+//       return true;
+//     }
+//   }
+//   return false;
+// };
+
+const graph = {
+  a: ["c", "b"],
+  b: ["d"],
+  c: ["e"],
+  d: ["f"],
+  e: [],
+  f: [],
+};
+// const output = hasPath(graph, "a", "e");
+// console.log(output);
+
+const hasPath = (graph, src, dst)=>{
+    const queue = [src];
+
+    while(queue.length){
+        const current = queue.shift();
+        if(current === dst) return true;
+
+        for(let neighbour of graph[current]){
+            queue.push(neighbour);
+        }
+    }
+    return false;
+}
+
+const output = hasPath(graph, 'a', 'e');
+console.log(output)
