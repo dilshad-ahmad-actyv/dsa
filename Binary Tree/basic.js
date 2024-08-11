@@ -14,8 +14,8 @@ const a = new Node(5);
 const b = new Node(11);
 const c = new Node(3);
 const d = new Node(4);
-const e = new Node(-15);
-const f = new Node(12);
+const e = new Node(2);
+const f = new Node(1);
 
 a.left = b;
 a.right = c;
@@ -145,14 +145,24 @@ c.right = f;
 // const output = treeMinValue(a, Infinity);
 // console.log(output);
 
-const treeMinValue = (root, min) => {
-  if (!root) return min;
-  return Math.min(
-    root.val,
-    treeMinValue(root.left, min),
-    treeMinValue(root.right, min)
-  );
+// const treeMinValue = (root, min) => {
+//   if (!root) return min;
+//   return Math.min(
+//     root.val,
+//     treeMinValue(root.left, min),
+//     treeMinValue(root.right, min)
+//   );
+// };
+
+// const output = treeMinValue(a, Infinity);
+// console.log(output);
+
+const maxPathSum = (root) => {
+  if (!root) return -Infinity;
+  if (!root.left && !root.right) return root.val;
+  const maxChildVal = Math.max(maxPathSum(root.left), maxPathSum(root.right));
+  return root.val + maxChildVal;
 };
 
-const output = treeMinValue(a, Infinity);
+const output = maxPathSum(a);
 console.log(output);
