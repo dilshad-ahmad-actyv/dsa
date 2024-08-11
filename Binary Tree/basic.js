@@ -49,11 +49,55 @@ c.right = f;
 // const output = depthFirstValues(a);
 // console.log(output);
 
-const depthFirstValues = (root) => {
-  if (!root) return [];
-  const leftValues = depthFirstValues(root.left);
-  const rightValues = depthFirstValues(root.right);
-  return [root.val, ...leftValues, ...rightValues];
+// const depthFirstValues = (root) => {
+//   if (!root) return [];
+//   const leftValues = depthFirstValues(root.left);
+//   const rightValues = depthFirstValues(root.right);
+//   return [root.val, ...leftValues, ...rightValues];
+// };
+
+// console.log(depthFirstValues(a));
+
+// BreadthFristSearch
+
+// const breadthFirstValues = (root)=>{
+//   const values = [];
+//   const queue = [root];
+
+//   while (queue.length) {
+//     const current = queue.shift();
+//     values.push(current.val);
+
+//     if (current.left) queue.push(current.left);
+//     if (current.right) queue.push(current.right);
+//   }
+//   return values;
+// }
+
+// console.log(breadthFirstValues(a));
+
+// const treeIncludes = (root, target) => {
+//   if(!root) return false;
+//   const queue = [root];
+
+//   while(queue.length){
+//     const current = queue.shift();
+//     if(current.val === target)return true;
+
+//     if(current.right) queue.push(current.right);
+//     if(current.left) queue.push(current.left);
+//   }
+//   return false;
+// };
+
+// const output = treeIncludes(a, "Z");
+// console.log(output)
+
+const treeIncludes = (root, target) => {
+  if(!root) return false;
+  if(root.val === target) return true;
+  return treeIncludes(root.left, target) || treeIncludes(root.right, target);
 };
 
-console.log(depthFirstValues(a));
+const output = treeIncludes(a, "E");
+console.log(output)
