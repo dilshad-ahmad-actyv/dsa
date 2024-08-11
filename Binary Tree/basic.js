@@ -10,12 +10,12 @@ class Node {
   }
 }
 
-const a = new Node(3);
+const a = new Node(5);
 const b = new Node(11);
-const c = new Node(4);
+const c = new Node(3);
 const d = new Node(4);
-const e = new Node(2);
-const f = new Node(1);
+const e = new Node(-15);
+const f = new Node(12);
 
 a.left = b;
 a.right = c;
@@ -119,11 +119,40 @@ c.right = f;
 // const output = treeSum(a, 0);
 // console.log(output);
 
-const treeSum = (root, sum) => {
-  if (!root) return 0;
+// const treeSum = (root, sum) => {
+//   if (!root) return 0;
 
-  return root.val + treeSum(root.left, sum) + treeSum(root.right, sum);
+//   return root.val + treeSum(root.left, sum) + treeSum(root.right, sum);
+// };
+
+// const output = treeSum(a, 0);
+// console.log(output);
+
+// const treeMinValue = (root, min) => {
+//   if (!root) return null;
+//   const queue = [root];
+
+//   while (queue.length) {
+//     const current = queue.shift();
+//     if (current.val < min) min = current.val;
+
+//     if (current.left) queue.push(current.left);
+//     if (current.right) queue.push(current.right);
+//   }
+//   return min;
+// };
+
+// const output = treeMinValue(a, Infinity);
+// console.log(output);
+
+const treeMinValue = (root, min) => {
+  if (!root) return min;
+  return Math.min(
+    root.val,
+    treeMinValue(root.left, min),
+    treeMinValue(root.right, min)
+  );
 };
 
-const output = treeSum(a, 0);
+const output = treeMinValue(a, Infinity);
 console.log(output);
