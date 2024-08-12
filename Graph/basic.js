@@ -295,42 +295,92 @@
 // }
 
 
-const isIslandCount = (grid) => {
+// const isIslandCount = (grid) => {
+//   const visited = new Set();
+//   let count = 0;
+//   const rows = grid.length;
+//   const cols = grid[0].length;
+
+//   for (let r = 0; r < rows; r++) {
+//     for (let c = 0; c < cols; c++) {
+//       if (explore(grid, r, c, visited)) {
+//         count++;
+//       }
+//     }
+//   }
+//   return count;
+// };
+
+// function explore(grid, r, c, visited) {
+//   const rowInbounds = 0 <= r && r < grid.length;
+//   const colInbounds = 0 <= c && c < grid[0].length;
+
+//   if (!rowInbounds || !colInbounds) return false;
+
+//   if (grid[r][c] === "W") return false;
+
+//   const position = r + "," + c;
+//   if (visited.has(position)) return false;
+//   visited.add(position);
+
+//   explore(grid, r - 1, c, visited);
+//   explore(grid, r + 1, c, visited);
+//   explore(grid, r, c - 1, visited);
+//   explore(grid, r, c + 1, visited);
+
+//   return true;
+// }
+
+// const grid = [
+//   ["W", "L", "W", "W", "W"],
+//   ["W", "L", "W", "W", "W"],
+//   ["W", "W", "W", "L", "W"],
+//   ["W", "W", "L", "L", "W"],
+//   ["L", "W", "W", "L", "L"],
+//   ["L", "L", "W", "W", "W"],
+// ];
+
+// const output = isIslandCount(grid);
+// console.log(output)
+
+
+const minIsland = (grid) => {
   const visited = new Set();
-  let count = 0;
+  let min = Infinity;
   const rows = grid.length;
   const cols = grid[0].length;
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      if (explore(grid, r, c, visited)) {
-        count++;
-      }
+      const size = exploreSize(grid, r, c, visited);
+      console.log("size", size);
+      if (size > 0 && min > size) min = size;
     }
   }
-  return count;
+
+  return min;
 };
 
-function explore(grid, r, c, visited) {
+function exploreSize(grid, r, c, visited) {
   const rowInbounds = 0 <= r && r < grid.length;
   const colInbounds = 0 <= c && c < grid[0].length;
 
-  if (!rowInbounds || !colInbounds) return false;
+  if (!rowInbounds || !colInbounds) return 0;
 
-  if (grid[r][c] === "W") return false;
+  if (grid[r][c] === "W") return 0;
 
   const position = r + "," + c;
-  if (visited.has(position)) return false;
+  if (visited.has(position)) return 0;
   visited.add(position);
 
-  explore(grid, r - 1, c, visited);
-  explore(grid, r + 1, c, visited);
-  explore(grid, r, c - 1, visited);
-  explore(grid, r, c + 1, visited);
+  let size = 1;
+  size += exploreSize(grid, r - 1, c, visited);
+  size += exploreSize(grid, r + 1, c, visited);
+  size += exploreSize(grid, r, c - 1, visited);
+  size += exploreSize(grid, r, c + 1, visited);
 
-  return true;
+  return size;
 }
-
 const grid = [
   ["W", "L", "W", "W", "W"],
   ["W", "L", "W", "W", "W"],
@@ -340,5 +390,5 @@ const grid = [
   ["L", "L", "W", "W", "W"],
 ];
 
-const output = isIslandCount(grid);
-console.log(output)
+const output = minIsland(grid);
+console.log(output);
