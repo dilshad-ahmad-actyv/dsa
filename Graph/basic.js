@@ -248,48 +248,97 @@
 // console.log(output)
 
 
-const shortestPath = (edges, NodeA, NodeB) => {
-  const graph = buildGraph(edges);
-  const queue = [[NodeA, 0]];
-  const visited = new Set([NodeA]);
-  while (queue.length) {
-    const [node, distance] = queue.shift();
+// const shortestPath = (edges, NodeA, NodeB) => {
+//   const graph = buildGraph(edges);
+//   const queue = [[NodeA, 0]];
+//   const visited = new Set([NodeA]);
+//   while (queue.length) {
+//     const [node, distance] = queue.shift();
 
-    if (node === NodeB) return distance;
+//     if (node === NodeB) return distance;
 
-    for (let neighbour of graph[node]) {
-      if (!visited.has(neighbour)) {
-        visited.add(neighbour);
-        queue.push([neighbour, distance + 1]);
+//     for (let neighbour of graph[node]) {
+//       if (!visited.has(neighbour)) {
+//         visited.add(neighbour);
+//         queue.push([neighbour, distance + 1]);
+//       }
+//     }
+//   }
+// };
+
+// function explorePath(graph, src, dst) {}
+
+// const edges = [
+//   ["w", "x"],
+//   ["x", "y"],
+//   ["z", "y"],
+//   ["z", "v"],
+//   ["w", "v"],
+// ];
+
+// const output = shortestPath(edges, "w", "z");
+// console.log(output)
+
+// function buildGraph(edges) {
+//   const graph = {};
+
+//   for (let edge of edges) {
+//     const [a, b] = edge;
+
+//     if (!graph[a]) graph[a] = [];
+//     if (!graph[b]) graph[b] = [];
+
+//     graph[a].push(b);
+//     graph[b].push(a);
+//   }
+//   return graph;
+// }
+
+
+const isIslandCount = (grid) => {
+  const visited = new Set();
+  let count = 0;
+  const rows = grid.length;
+  const cols = grid[0].length;
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (explore(grid, r, c, visited)) {
+        count++;
       }
     }
   }
+  return count;
 };
 
-function explorePath(graph, src, dst) {}
+function explore(grid, r, c, visited) {
+  const rowInbounds = 0 <= r && r < grid.length;
+  const colInbounds = 0 <= c && c < grid[0].length;
 
-const edges = [
-  ["w", "x"],
-  ["x", "y"],
-  ["z", "y"],
-  ["z", "v"],
-  ["w", "v"],
+  if (!rowInbounds || !colInbounds) return false;
+
+  if (grid[r][c] === "W") return false;
+
+  const position = r + "," + c;
+  if (visited.has(position)) return false;
+  visited.add(position);
+
+  explore(grid, r - 1, c, visited);
+  explore(grid, r + 1, c, visited);
+  explore(grid, r, c - 1, visited);
+  explore(grid, r, c + 1, visited);
+
+  return true;
+}
+
+const grid = [
+  ["W", "L", "W", "W", "W"],
+  ["W", "L", "W", "W", "W"],
+  ["W", "W", "W", "L", "W"],
+  ["W", "W", "L", "L", "W"],
+  ["L", "W", "W", "L", "L"],
+  ["L", "L", "W", "W", "W"],
 ];
 
-const output = shortestPath(edges, "w", "z");
+const output = isIslandCount(grid);
 console.log(output)
-
-function buildGraph(edges) {
-  const graph = {};
-
-  for (let edge of edges) {
-    const [a, b] = edge;
-
-    if (!graph[a]) graph[a] = [];
-    if (!graph[b]) graph[b] = [];
-
-    graph[a].push(b);
-    graph[b].push(a);
-  }
-  return graph;
-}
