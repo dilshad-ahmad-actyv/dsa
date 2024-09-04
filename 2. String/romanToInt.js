@@ -63,3 +63,7 @@ function isConditionMatch(roman, position, s) {
   }
   return false;
 }
+
+
+const s = "MCMXCIV";
+romanToInt(s);
