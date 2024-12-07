@@ -1,29 +1,29 @@
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
-  }
-}
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
 
-const a = new Node("A");
-const b = new Node("B");
-const c = new Node("C");
-const d = new Node("D");
-const e = new Node("E");
-const f = new Node("F");
+// const a = new Node("A");
+// const b = new Node("B");
+// const c = new Node("C");
+// const d = new Node("D");
+// const e = new Node("E");
+// const f = new Node("F");
 
-const x = new Node(1);
-const y = new Node(2);
-const z = new Node(3);
+// const x = new Node(1);
+// const y = new Node(2);
+// const z = new Node(3);
 
-a.next = b;
-b.next = c;
-c.next = d;
-d.next = e;
-e.next = f;
+// a.next = b;
+// b.next = c;
+// c.next = d;
+// d.next = e;
+// e.next = f;
 
-x.next = y;
-y.next = z;
+// x.next = y;
+// y.next = z;
 // A --> B --> C --> D --> E --F ---> NULL
 // head                       //tail
 // const printLinkedList = (head) => {
@@ -201,18 +201,129 @@ y.next = z;
 // const result = zipperList(a, x);
 // console.log(result);
 
-const zipperList = (head1, head2) => {
-    if (!head1 && !head2) return null;
-  if (!head1) return head2;
-  if (!head2) return head1;
-  
-  let next1 = head1.next;
-  let next2 = head2.next;
+// const zipperList = (head1, head2) => {
+//     if (!head1 && !head2) return null;
+//   if (!head1) return head2;
+//   if (!head2) return head1;
 
-  head1.next = head2;
-  head2.next = zipperList(next1, next2);
-  return head1;
+//   let next1 = head1.next;
+//   let next2 = head2.next;
+
+//   head1.next = head2;
+//   head2.next = zipperList(next1, next2);
+//   return head1;
+// };
+
+// const result = zipperList(a, x);
+// console.log(result);
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+const a = new Node(2);
+const b = new Node(8);
+const c = new Node(3);
+const d = new Node(7);
+
+a.next = b;
+b.next = c;
+c.next = d;
+
+let current = a;
+// while (current) {
+//   console.log(current.value);
+//   current = current.next;
+// }
+
+// printLinkedList(a);
+// function printLinkedList(a) {
+//   if (!a) return null;
+//   console.log(a.value);
+//   return printLinkedList(a.next);
+// }
+
+// const values = [];
+// while (current) {
+//   values.push(current.value);
+//   current = current.next;
+// }
+// console.log(values);
+
+// function storeValues(head, values = []) {
+//   current = head;
+//   if (!current) return;
+//   values.push(current.value);
+//   storeValues(current.next, values);
+//   return values;
+// }
+// const result = storeValues(a);
+// console.log(result);
+
+// let sum = 0;
+// while (current) {
+//   sum += current.value;
+//   current = current.next;
+// }
+// console.log(sum);
+
+// function linkedListSum(head) {
+//   if (!head) return 0;
+//   return head.value + linkedListSum(head.next);
+// }
+
+// const result = linkedListSum(a);
+// console.log(result);
+
+// function findLinkedListTarget(head, target) {
+//   let current = head;
+//   // while (current) {
+//   //   if (current.value === target) return true;
+//   //   current = current.next;
+//   // }
+//   // return false;
+
+//   if (!current) return false;
+//   if (current.value === target) return true;
+//   return findLinkedListTarget(current.next, target);
+// }
+
+// const result = findLinkedListTarget(a, 3);
+// console.log(result);
+
+// const getNodeValue = (head, index) => {
+//   if (!head) return null;
+//   if (index === 0) return head.value;
+//   return getNodeValue(head.next, index - 1);
+// };
+
+// const result = getNodeValue(a, 4);
+// console.log(result);
+
+const reverseLinkedList = (head) => {
+  let prev = null;
+  let current = head;
+  // while (current) {
+  //   let next = current.next;
+  //   current.next = prev;
+  //   prev = current;
+  //   current = next;
+  // }
+  // return prev;
+  return reverse(current, prev);
 };
 
-const result = zipperList(a, x);
+const result = reverseLinkedList(a);
 console.log(result);
+
+function reverse(current, prev) {
+  if (!current) return prev;
+
+  let next = current.next;
+  current.next = prev;
+  // prev = current;
+  return reverse(next, current);
+}
