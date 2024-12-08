@@ -509,35 +509,121 @@
 
 
 
-const connectedComponentsCount = (graph) => {
-  const visited = new Set();
-  let count = 0;
-  for (const current in graph) {
-    if (explore(graph, +current, visited)) count++;
+// const connectedComponentsCount = (graph) => {
+//   const visited = new Set();
+//   let count = 0;
+//   for (const current in graph) {
+//     if (explore(graph, +current, visited)) count++;
+//   }
+//   return count;
+// };
+
+// const explore = (graph, current, visited) => {
+//   if (visited.has(current)) return false;
+//   // console.log(current, typeof current)
+//   visited.add(current);
+
+//   for(const neighbour of graph[current]){
+//     explore(graph, neighbour, visited)
+//   }
+//   return true;
+// };
+
+// const graph = {
+//   0: [8, 1, 5],
+//   1: [0],
+//   5: [0, 8],
+//   8: [0, 5],
+//   2: [3, 4],
+//   3: [2, 4],
+//   4: [3, 2],
+// };
+
+// const res = connectedComponentsCount(graph)
+// console.log(res)
+
+
+
+// const largestComponent = (graph) => {
+//   const visited = new Set();
+//   let largest = -Infinity;
+
+//   for (const current in graph) {
+//     const size = explore(graph, +current, visited);
+//     if (size) {
+//       if (largest < size) largest = size;
+//     }
+//   }
+//   return largest;
+// };
+
+// const explore = (graph, current, visited) => {
+//   if (visited.has(current)) return 0;
+//   // console.log(current, typeof current)
+//   visited.add(current);
+//   let count = 1;
+//   for (const neighbour of graph[current]) {
+//     count++;
+//     explore(graph, neighbour, visited);
+//   }
+//   return count;
+// };
+
+// const graph = {
+//   0: [8, 1, 5],
+//   1: [0],
+//   5: [0, 8],
+//   8: [0, 5],
+//   2: [3, 4],
+//   3: [2, 4],
+//   4: [3, 2],
+// };
+
+// const res = largestComponent(graph);
+// console.log(res)
+
+
+const shortestPath = (edges, src, dst) => {
+  const graph = buildGraph(edges);
+  const queue = [[src, 0]];
+  const visited = new Set([src])
+  while(queue.length > 0) {
+    const [node, distance] = queue.shift();
+    if(node === dst) return distance;
+    for(let current of graph[node]){
+      if(!(visited.has(current))){
+        visited.add(current)
+        queue.push([current, distance + 1])
+      }
+    }
   }
-  return count;
-};
+  return -1;
+}
 
-const explore = (graph, current, visited) => {
-  if (visited.has(current)) return false;
-  // console.log(current, typeof current)
-  visited.add(current);
 
-  for(const neighbour of graph[current]){
-    explore(graph, neighbour, visited)
+
+const buildGraph = (edges) => {
+  const graph = {};
+
+  for (const edge of edges) {
+    const [a, b] = edge;
+    if (!graph[a]) graph[a] = [];
+    if (!graph[b]) graph[b] = [];
+
+    graph[a].push(b);
+    graph[b].push(a);
   }
-  return true;
+  return graph;
 };
 
-const graph = {
-  0: [8, 1, 5],
-  1: [0],
-  5: [0, 8],
-  8: [0, 5],
-  2: [3, 4],
-  3: [2, 4],
-  4: [3, 2],
-};
 
-const res = connectedComponentsCount(graph)
-console.log(res)
+
+const edges = [
+  ["w", "x"],
+  ["x", "y"],
+  ["z", "y"],
+  ["z", "v"],
+  ["w", "v"],
+];
+const result = shortestPath(edges, "w", "z");
+console.log(result)
