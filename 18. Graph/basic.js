@@ -344,51 +344,200 @@
 // console.log(output)
 
 
-const minIsland = (grid) => {
+// const minIsland = (grid) => {
+//   const visited = new Set();
+//   let min = Infinity;
+//   const rows = grid.length;
+//   const cols = grid[0].length;
+
+//   for (let r = 0; r < rows; r++) {
+//     for (let c = 0; c < cols; c++) {
+//       const size = exploreSize(grid, r, c, visited);
+//       console.log("size", size);
+//       if (size > 0 && min > size) min = size;
+//     }
+//   }
+
+//   return min;
+// };
+
+// function exploreSize(grid, r, c, visited) {
+//   const rowInbounds = 0 <= r && r < grid.length;
+//   const colInbounds = 0 <= c && c < grid[0].length;
+
+//   if (!rowInbounds || !colInbounds) return 0;
+
+//   if (grid[r][c] === "W") return 0;
+
+//   const position = r + "," + c;
+//   if (visited.has(position)) return 0;
+//   visited.add(position);
+
+//   let size = 1;
+//   size += exploreSize(grid, r - 1, c, visited);
+//   size += exploreSize(grid, r + 1, c, visited);
+//   size += exploreSize(grid, r, c - 1, visited);
+//   size += exploreSize(grid, r, c + 1, visited);
+
+//   return size;
+// }
+// const grid = [
+//   ["W", "L", "W", "W", "W"],
+//   ["W", "L", "W", "W", "W"],
+//   ["W", "W", "W", "L", "W"],
+//   ["W", "W", "L", "L", "W"],
+//   ["L", "W", "W", "L", "L"],
+//   ["L", "L", "W", "W", "W"],
+// ];
+
+// const output = minIsland(grid);
+// console.log(output);
+
+// Graph = Nodes + Edges
+// Graph - 1. Directed Graph(--->) 2. Undirected Graph(---)
+
+
+// const depthFirstPrint = (graph, source) => {
+//   const stack = [source];
+
+//   while (stack.length > 0) {
+//     const current = stack.pop();
+//     console.log(current);
+//     for (const neighbour of graph[current]) {
+//       stack.push(neighbour);
+//     }
+//   }
+// };
+
+
+// const depthFirstPrint = (graph, source) => {
+//   console.log(source);
+//   for (let neighbour of graph[source]) {
+//     depthFirstPrint(graph, neighbour);
+//   }
+// };
+// const graph = {
+//   a: ["b", "c"],
+//   b: ["d"],
+//   c: ["e"],
+//   d: ["f"],
+//   e: [],
+//   f: [],
+// };
+
+
+// depthFirstPrint(graph, "a");
+// console.log(graph);
+
+// const breadthFirstPrint = (graph, source) => {
+//   const queue = [source];
+
+//   while (queue.length > 0) {
+//     const current = queue.shift();
+//     console.log(current);
+//     for (let neighbour of graph[current]) {
+//       queue.push(neighbour);
+//     }
+//   }
+// };
+
+// breadthFirstPrint(graph, 'a')
+
+
+// const hasPath = (graph, source, dst) => {
+//   if (source === dst) return true;
+
+//   for (let neighbour of graph[source]) {
+//     if (hasPath(graph, neighbour, dst) === true) return true;
+//   }
+
+//   return false;
+// };
+// const graph = {
+//   f: ["g", "i"],
+//   g: ["h"],
+//   h: [],
+//   i: ["g", "k"],
+//   j: [],
+//   k: [],
+// };
+
+// const result = hasPath(graph, 'f', 'n')
+// console.log(result)
+
+// const edges = [
+//   ["i", "j"],
+//   ["k", "i"],
+//   ["m", "k"],
+//   ["k", "l"],
+//   ["o", "n"],
+// ];
+
+// const buildGraph = (edges) => {
+//   const graph = {};
+
+//   for (let item of edges) {
+//     const [a, b] = item;
+//     if (!graph[a]) graph[a] = [];
+//     if (!graph[b]) graph[b] = [];
+
+//     graph[a].push(b);
+//     graph[b].push(a);
+//   }
+//   return graph;
+// };
+
+// const result = undirectedPath(edges, "j", "k");
+// console.log(result);
+
+// function undirectedPath(edges, nodeA, nodeB) {
+//   const graph = buildGraph(edges);
+//   return hasPath(graph, nodeA, nodeB, new Set());
+// }
+
+// function hasPath(graph, src, dst, visited) {
+//   if (src === dst) return true;
+//   if (visited.has(src)) return false;
+//   visited.add(src);
+
+//   for (let neighbour of graph[src]) {
+//     if (hasPath(graph, neighbour, dst, visited) === true) return true;
+//   }
+
+//   return false;
+// }
+
+
+
+const connectedComponentsCount = (graph) => {
   const visited = new Set();
-  let min = Infinity;
-  const rows = grid.length;
-  const cols = grid[0].length;
-
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const size = exploreSize(grid, r, c, visited);
-      console.log("size", size);
-      if (size > 0 && min > size) min = size;
-    }
+  let count = 0;
+  for (const current in graph) {
+    if (explore(graph, +current, visited)) count++;
   }
-
-  return min;
+  return count;
 };
 
-function exploreSize(grid, r, c, visited) {
-  const rowInbounds = 0 <= r && r < grid.length;
-  const colInbounds = 0 <= c && c < grid[0].length;
+const explore = (graph, current, visited) => {
+  if (visited.has(current)) return false;
+  // console.log(current, typeof current)
+  visited.add(current);
 
-  if (!rowInbounds || !colInbounds) return 0;
+  for(const neighbour of graph[current]){
+    explore(graph, neighbour, visited)
+  }
+  return true;
+};
 
-  if (grid[r][c] === "W") return 0;
+const graph = {
+  0: [8, 1, 5],
+  1: [0],
+  5: [0, 8],
+  8: [0, 5],
+  2: [3, 4],
+  3: [2, 4],
+  4: [3, 2],
+};
 
-  const position = r + "," + c;
-  if (visited.has(position)) return 0;
-  visited.add(position);
-
-  let size = 1;
-  size += exploreSize(grid, r - 1, c, visited);
-  size += exploreSize(grid, r + 1, c, visited);
-  size += exploreSize(grid, r, c - 1, visited);
-  size += exploreSize(grid, r, c + 1, visited);
-
-  return size;
-}
-const grid = [
-  ["W", "L", "W", "W", "W"],
-  ["W", "L", "W", "W", "W"],
-  ["W", "W", "W", "L", "W"],
-  ["W", "W", "L", "L", "W"],
-  ["L", "W", "W", "L", "L"],
-  ["L", "L", "W", "W", "W"],
-];
-
-const output = minIsland(grid);
-console.log(output);
+const res = connectedComponentsCount(graph)
+console.log(res)
