@@ -175,13 +175,12 @@ class Node{
   }
 }
 
-const a = new Node("A");
-const b = new Node("B");
-const c = new Node("C");
-const d = new Node("D");
-const e = new Node("E");
-const f = new Node("F");
-const g = new Node("G");
+const a = new Node(5);
+const b = new Node(11);
+const c = new Node(3);
+const d = new Node(4);
+const e = new Node(2);
+const f = new Node(1);
 
 a.left = b;
 a.right = c;
@@ -189,12 +188,11 @@ b.left = d;
 b.right = e;
 c.right = f;
 
-
 // Depth-first search
 // A->B->D->E->C->F
 
 // function depthFirstValues(head){
-  //Iterative approach
+//Iterative approach
 //   const stack = [head];
 //   const values = [];
 
@@ -220,19 +218,34 @@ c.right = f;
 // Breadth-first search
 // A->B->C->D->E->F
 
-const breadthFirstValues = (head)=>{
-  const values = [];
-  const queue = [head];
+// const breadthFirstValues = (head)=>{
+//   const values = [];
+//   const queue = [head];
 
-  while (queue.length > 0) {
-    const currentNode = queue.shift();
-    values.push(currentNode.value);
+//   while (queue.length > 0) {
+//     const currentNode = queue.shift();
+//     values.push(currentNode.value);
 
-    if (currentNode.left) queue.push(currentNode.left);
-    if (currentNode.right) queue.push(currentNode.right);
+//     if (currentNode.left) queue.push(currentNode.left);
+//     if (currentNode.right) queue.push(currentNode.right);
+//   }
+//   return values;
+// }
+
+// const result = breadthFirstValues(a)
+// console.log(result)
+
+const maxSumRootToLeaf = (head) => {
+  if (!head) {
+    return -Infinity;
   }
-  return values;
-}
 
-const result = breadthFirstValues(a)
-console.log(result)
+  if (head.left === null && head.right === null) return head.value;
+  const left = maxSumRootToLeaf(head.left);
+
+  const right = maxSumRootToLeaf(head.right);
+  return head.value + Math.max(left, right);
+};
+
+const result = maxSumRootToLeaf(a);
+console.log(result);
