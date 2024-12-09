@@ -583,47 +583,47 @@
 // console.log(res)
 
 
-const shortestPath = (edges, src, dst) => {
-  const graph = buildGraph(edges);
-  const queue = [[src, 0]];
-  const visited = new Set([src])
-  while(queue.length > 0) {
-    const [node, distance] = queue.shift();
-    if(node === dst) return distance;
-    for(let current of graph[node]){
-      if(!(visited.has(current))){
-        visited.add(current)
-        queue.push([current, distance + 1])
-      }
-    }
-  }
-  return -1;
-}
+// const shortestPath = (edges, src, dst) => {
+//   const graph = buildGraph(edges);
+//   const queue = [[src, 0]];
+//   const visited = new Set([src])
+//   while(queue.length > 0) {
+//     const [node, distance] = queue.shift();
+//     if(node === dst) return distance;
+//     for(let current of graph[node]){
+//       if(!(visited.has(current))){
+//         visited.add(current)
+//         queue.push([current, distance + 1])
+//       }
+//     }
+//   }
+//   return -1;
+// }
 
 
 
-const buildGraph = (edges) => {
-  const graph = {};
+// const buildGraph = (edges) => {
+//   const graph = {};
 
-  for (const edge of edges) {
-    const [a, b] = edge;
-    if (!graph[a]) graph[a] = [];
-    if (!graph[b]) graph[b] = [];
+//   for (const edge of edges) {
+//     const [a, b] = edge;
+//     if (!graph[a]) graph[a] = [];
+//     if (!graph[b]) graph[b] = [];
 
-    graph[a].push(b);
-    graph[b].push(a);
-  }
-  return graph;
-};
+//     graph[a].push(b);
+//     graph[b].push(a);
+//   }
+//   return graph;
+// };
 
 
 
-const edges = [
-  ["w", "x"],
-  ["x", "y"],
-  ["z", "y"],
-  ["z", "v"],
-  ["w", "v"],
-];
-const result = shortestPath(edges, "w", "z");
-console.log(result)
+// const edges = [
+//   ["w", "x"],
+//   ["x", "y"],
+//   ["z", "y"],
+//   ["z", "v"],
+//   ["w", "v"],
+// ];
+// const result = shortestPath(edges, "w", "z");
+// console.log(result)
